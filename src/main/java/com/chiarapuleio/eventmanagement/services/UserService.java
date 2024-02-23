@@ -15,16 +15,6 @@ public class UserService {
     @Autowired
     private UserDAO userDAO;
 
-    public User save(User user){
-        User newUser = new User();
-        newUser.setName(user.getName());
-        newUser.setSurname(user.getSurname());
-        newUser.setEmail(user.getEmail());
-        newUser.setPassword(user.getPassword());
-
-        return userDAO.save(newUser);
-    }
-
     public List<User> getUsers(){
         return this.userDAO.findAll();
     }
@@ -33,5 +23,7 @@ public class UserService {
         return userDAO.findById(userId).orElseThrow(() -> new NotFoundException(userId));
     }
 
-
+    public User findByEmail(String email) {
+        return userDAO.findByEmail(email).orElseThrow(() -> new NotFoundException(email + " not found."));
+    }
 }
