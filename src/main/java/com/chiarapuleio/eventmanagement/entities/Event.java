@@ -29,7 +29,7 @@ public class Event {
     private int maxParticipants;
     @OneToMany(mappedBy = "event")
     @JsonIgnore
-    private List<Reservation> reservations = new ArrayList<>();
+    private List<Reservation> reservations;
 
     public Event(String title, String description, LocalDate eventDate, String eventLocation, int maxParticipants) {
         this.title = title;
@@ -37,5 +37,6 @@ public class Event {
         this.eventDate = eventDate;
         this.eventLocation = eventLocation;
         this.maxParticipants = maxParticipants;
+        this.reservations = new ArrayList<>();
     }
 }

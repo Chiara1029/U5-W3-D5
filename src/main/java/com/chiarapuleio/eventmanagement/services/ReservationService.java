@@ -9,6 +9,7 @@ import com.chiarapuleio.eventmanagement.payloads.ReservationDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -33,5 +34,9 @@ public class ReservationService {
 
     public Reservation findById(UUID resId){
         return reservationDAO.findById(resId).orElseThrow(() -> new NotFoundException(resId));
+    }
+
+    public List<Reservation> getReservations(){
+        return this.reservationDAO.findAll();
     }
 }

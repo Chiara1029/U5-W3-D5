@@ -2,6 +2,7 @@ package com.chiarapuleio.eventmanagement.services;
 
 import com.chiarapuleio.eventmanagement.dao.EventDAO;
 import com.chiarapuleio.eventmanagement.entities.Event;
+import com.chiarapuleio.eventmanagement.exceptions.BadRequestException;
 import com.chiarapuleio.eventmanagement.exceptions.NotFoundException;
 import com.chiarapuleio.eventmanagement.payloads.EventDTO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,13 @@ public class EventService {
         eventFound.setMaxParticipants(event.getMaxParticipants());
 
         return eventDAO.save(eventFound);
+    }
+
+    public void findByIdAndDelete(UUID eventId){
+        Event event = this.findById(eventId);
+        if(!event.getReservations().isEmpty()){
+            throw new BadRequestException(eventId + " cannot be deleted.");
+        }
+        eventDAO.delete(event);
     }
 }

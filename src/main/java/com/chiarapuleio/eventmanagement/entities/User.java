@@ -34,7 +34,7 @@ public class User implements UserDetails {
     private Role role;
     @OneToMany(mappedBy = "user")
     @JsonIgnore
-    private List<Reservation> reservationList = new ArrayList<>();
+    private List<Reservation> reservationList;
 
     public User(String name, String surname, String email, String password) {
         this.name = name;
@@ -42,6 +42,7 @@ public class User implements UserDetails {
         this.email = email;
         this.password = password;
         this.role = Role.USER;
+        this.reservationList = new ArrayList<>();
     }
 
     @Override
