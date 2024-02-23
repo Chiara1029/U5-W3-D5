@@ -23,7 +23,7 @@ public class ReservationController {
     }
 
     @GetMapping
-    @PreAuthorize("hasAuthority('EVENT_MANAGER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<Reservation> getReservations(){
         return this.resSrv.getReservations();
     }

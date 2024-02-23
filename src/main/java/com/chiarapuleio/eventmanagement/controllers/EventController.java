@@ -17,7 +17,7 @@ public class EventController {
     private EventService eventSrv;
 
     @PostMapping
-    @PreAuthorize("hasAuthority('EVENT_MANAGER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Event save(@RequestBody EventDTO event){
         return eventSrv.save(event);
     }
@@ -28,12 +28,12 @@ public class EventController {
     }
 
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('EVENT_MANAGER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public Event uploadEvent(@PathVariable UUID eventId, @RequestBody Event event){
         return eventSrv.findByIdAndUpdate(eventId, event);
     }
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('EVENT_MANAGER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void deleteEvent(@PathVariable UUID eventId){
         eventSrv.findByIdAndDelete(eventId);
     }

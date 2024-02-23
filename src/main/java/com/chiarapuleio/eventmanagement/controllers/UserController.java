@@ -6,9 +6,7 @@ import com.chiarapuleio.eventmanagement.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,7 +17,7 @@ public class UserController {
     private UserService userSrv;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('EVENT_MANAGER')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<User> getUsers(){
         return this.userSrv.getUsers();
     }
@@ -32,5 +30,11 @@ public class UserController {
     @GetMapping("/me/reservations")
     public List<Reservation> getUserReservations(@AuthenticationPrincipal User user){
         return user.getReservationList();
+    }
+
+    @PatchMapping("/me/setmanager")
+    public User findByTokenAndChangeRole(@AuthenticationPrincipal User user) {
+        User updateUser = userSrv.findByTokenAndChangeRole(user);
+        return updateUser;
     }
 }

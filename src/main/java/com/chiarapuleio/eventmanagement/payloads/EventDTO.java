@@ -20,7 +20,7 @@ public record EventDTO(
 
         @NotEmpty(message = "Location required.")
         @Size(min=3, max=30, message = "Location must have from 3 to 30 characters.")
-        String location,
+        String eventLocation,
 
         @NotNull(message = "Reservation limit required.")
         int maxParticipants
