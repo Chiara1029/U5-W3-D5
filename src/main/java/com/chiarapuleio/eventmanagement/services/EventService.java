@@ -21,6 +21,7 @@ public class EventService {
         newEvent.setTitle(event.title());
         newEvent.setDescription(event.description());
         newEvent.setEventDate(event.eventDate());
+        newEvent.setEventLocation(event.eventLocation());
         newEvent.setMaxParticipants(event.maxParticipants());
 
         return eventDAO.save(newEvent);
